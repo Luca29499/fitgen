@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#2f7a67"/>
+  <circle cx="256" cy="256" r="166" fill="#f5f2ea"/>
+  <text x="256" y="296" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="132" font-weight="900" fill="#202321">FG</text>
+  <path fill="#d76745" d="M336 334c34-24 52-58 52-102h-49c0 29-12 51-37 67l34 35Z"/>
+</svg>

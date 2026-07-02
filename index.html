@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f2ea" />
+    <title>FitGen</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="hero" aria-labelledby="app-title">
+        <div>
+          <p class="eyebrow">Tagesplan Generator</p>
+          <h1 id="app-title">FitGen</h1>
+        </div>
+        <div class="status-pill" id="saved-count">0 gespeichert</div>
+      </section>
+
+      <nav class="tabs" aria-label="Ansichten">
+        <button class="tab-button active" type="button" data-view="generator">Plan erstellen</button>
+        <button class="tab-button" type="button" data-view="saved">Gespeicherte Pläne</button>
+      </nav>
+
+      <section class="view active" id="generator-view">
+        <form class="planner-form" id="planner-form">
+          <div class="field-group">
+            <label for="energy">Wie fit fühlst du dich heute?</label>
+            <div class="range-row">
+              <input id="energy" name="energy" type="range" min="1" max="5" value="3" />
+              <output id="energy-label" for="energy">Solide</output>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label for="minutes">Wie viel Zeit hast du?</label>
+            <div class="stepper">
+              <button type="button" class="icon-button" id="minus-time" aria-label="Zeit verringern">-</button>
+              <input id="minutes" name="minutes" type="number" min="8" max="120" step="5" value="25" inputmode="numeric" />
+              <span>Min.</span>
+              <button type="button" class="icon-button" id="plus-time" aria-label="Zeit erhöhen">+</button>
+            </div>
+          </div>
+
+          <fieldset class="field-group">
+            <legend>Trainingsart</legend>
+            <div class="segmented">
+              <label><input type="radio" name="mode" value="kraft" checked /> Kraft</label>
+              <label><input type="radio" name="mode" value="cardio" /> Cardio</label>
+              <label><input type="radio" name="mode" value="mix" /> Mix</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group conditional-field" id="cardio-options" hidden>
+            <legend>Cardio-Setup</legend>
+            <div class="segmented">
+              <label><input type="radio" name="location" value="home" checked /> Zuhause</label>
+              <label><input type="radio" name="location" value="outdoor" /> Draußen</label>
+              <label><input type="radio" name="location" value="both" /> Egal</label>
+            </div>
+            <div class="chip-grid compact-grid">
+              <label><input type="checkbox" name="cardioTools" value="joggen" /> Joggen</label>
+              <label><input type="checkbox" name="cardioTools" value="fahrrad" /> Fahrrad</label>
+              <label><input type="checkbox" name="cardioTools" value="treppen" /> Treppen</label>
+              <label><input type="checkbox" name="cardioTools" value="intervalle" checked /> Intervalle</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend>Muskelgruppe</legend>
+            <div class="chip-grid">
+              <label><input type="checkbox" name="groups" value="ganzkoerper" checked /> Ganzkörper</label>
+              <label><input type="checkbox" name="groups" value="beine" /> Beine</label>
+              <label><input type="checkbox" name="groups" value="brust" /> Brust</label>
+              <label><input type="checkbox" name="groups" value="ruecken" /> Rücken</label>
+              <label><input type="checkbox" name="groups" value="bauch" /> Bauch</label>
+              <label><input type="checkbox" name="groups" value="schultern" /> Schultern</label>
+              <label><input type="checkbox" name="groups" value="arme" /> Arme</label>
+            </div>
+          </fieldset>
+
+          <fieldset class="field-group">
+            <legend>Optional</legend>
+            <div class="toggle-list">
+              <label><input type="checkbox" name="quiet" /> leise / keine Sprünge</label>
+              <label><input type="checkbox" name="gentle" /> gelenkschonend</label>
+              <label><input type="checkbox" name="hasEquipment" id="has-equipment" /> Geräte vorhanden</label>
+            </div>
+            <div class="equipment-picker" id="equipment-picker" hidden>
+              <div class="chip-grid compact-grid">
+                <label><input type="checkbox" name="gear" value="wasserflaschen" /> Wasserflaschen</label>
+                <label><input type="checkbox" name="gear" value="getraenkekasten" /> Getränkekasten</label>
+                <label><input type="checkbox" name="gear" value="stuhl" /> Stuhl/Bank</label>
+                <label><input type="checkbox" name="gear" value="rucksack" /> Rucksack</label>
+                <label><input type="checkbox" name="gear" value="handtuch" /> Handtuch</label>
+                <label><input type="checkbox" name="gear" value="besenstiel" /> Besenstiel</label>
+                <label><input type="checkbox" name="gear" value="buecher" /> Bücher</label>
+                <label><input type="checkbox" name="gear" value="sofa" /> Sofa/Bettkante</label>
+                <label><input type="checkbox" name="gear" value="hanteln" /> Hanteln</label>
+                <label><input type="checkbox" name="gear" value="hantelbank" /> Hantelbank</label>
+                <label><input type="checkbox" name="gear" value="kabelzug" /> Kabelzug</label>
+                <label><input type="checkbox" name="gear" value="fahrrad" /> Fahrrad</label>
+              </div>
+            </div>
+          </fieldset>
+
+          <button class="primary-button" id="create-plan" type="button">Trainingsplan erstellen</button>
+        </form>
+
+        <section class="plan-panel empty" id="plan-panel" aria-live="polite">
+          <div class="empty-state">
+            <div class="mark">FG</div>
+            <h2>Bereit für deinen Tagesplan</h2>
+            <p>Wähle Tagesform, Zeit und Ziel. Danach stelle ich dir einen passenden Plan zusammen.</p>
+          </div>
+        </section>
+      </section>
+
+      <section class="view" id="saved-view">
+        <div class="saved-header">
+          <h2>Gespeicherte Pläne</h2>
+          <button class="secondary-button danger" id="clear-saved" type="button">Alle löschen</button>
+        </div>
+        <div class="saved-list" id="saved-list"></div>
+      </section>
+    </main>
+
+    <template id="plan-template">
+      <article class="plan-card">
+        <header class="plan-card-header">
+          <div>
+            <p class="eyebrow plan-date"></p>
+            <h2 class="plan-title"></h2>
+          </div>
+          <button class="secondary-button save-plan" type="button">Speichern</button>
+        </header>
+        <div class="summary-grid"></div>
+        <ol class="exercise-list"></ol>
+        <p class="plan-note"></p>
+      </article>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
