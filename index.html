@@ -54,12 +54,14 @@
 
           <fieldset class="field-group conditional-field" id="cardio-options" hidden>
             <legend>Cardio-Setup</legend>
+            <p class="sublegend">Ort</p>
             <div class="segmented">
               <label><input type="radio" name="location" value="home" checked /> Zuhause</label>
               <label><input type="radio" name="location" value="outdoor" /> Draußen</label>
               <label><input type="radio" name="location" value="both" /> Egal</label>
             </div>
-            <div class="chip-grid compact-grid">
+            <p class="sublegend">Möglichkeit</p>
+            <div class="chip-grid compact-grid cardio-tools-grid">
               <label><input type="checkbox" name="cardioTools" value="joggen" /> Joggen</label>
               <label><input type="checkbox" name="cardioTools" value="fahrrad" /> Fahrrad</label>
               <label><input type="checkbox" name="cardioTools" value="treppen" /> Treppen</label>
@@ -88,7 +90,7 @@
               <label><input type="checkbox" name="hasEquipment" id="has-equipment" /> Geräte vorhanden</label>
             </div>
             <div class="equipment-picker" id="equipment-picker" hidden>
-              <div class="chip-grid compact-grid">
+              <div class="chip-grid compact-grid equipment-grid">
                 <label><input type="checkbox" name="gear" value="wasserflaschen" /> Wasserflaschen</label>
                 <label><input type="checkbox" name="gear" value="getraenkekasten" /> Getränkekasten</label>
                 <label><input type="checkbox" name="gear" value="stuhl" /> Stuhl/Bank</label>

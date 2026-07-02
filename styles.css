@@ -164,6 +164,24 @@ legend {
   font-weight: 850;
 }
 
+.sublegend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 950;
+  text-transform: uppercase;
+}
+
+.sublegend::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  background: var(--line);
+}
+
 .range-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 86px;
@@ -213,6 +231,7 @@ input[type="number"] {
 .toggle-list {
   display: grid;
   gap: 8px;
+  min-width: 0;
 }
 
 .segmented {
@@ -227,9 +246,14 @@ input[type="number"] {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.cardio-tools-grid,
+.equipment-grid {
+  grid-template-columns: 1fr;
+}
+
 .conditional-field,
 .equipment-picker {
-  padding: 10px;
+  padding: 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(220, 238, 232, 0.45);
@@ -241,6 +265,7 @@ input[type="number"] {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
   min-height: 44px;
   padding: 10px 11px;
   border: 1px solid var(--line);
@@ -248,10 +273,13 @@ input[type="number"] {
   background: var(--surface-strong);
   font-weight: 800;
   line-height: 1.1;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 input[type="radio"],
 input[type="checkbox"] {
+  flex: 0 0 auto;
   width: 18px;
   height: 18px;
   accent-color: var(--accent);
@@ -528,6 +556,23 @@ input[type="checkbox"] {
 
   .compact-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cardio-tools-grid,
+  .equipment-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .segmented {
+    grid-template-columns: 1fr;
+  }
+
+  .compact-grid,
+  .cardio-tools-grid,
+  .equipment-grid {
+    grid-template-columns: 1fr;
   }
 }
 

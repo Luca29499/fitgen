@@ -1,4 +1,4 @@
-const CACHE_NAME = "fitgen-v1";
+const CACHE_NAME = "fitgen-v3";
 const ASSETS = [
   "./",
   "./index.html",
